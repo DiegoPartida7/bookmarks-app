@@ -159,18 +159,18 @@ function deleteBookmark(id){
 
 }
 
-function updateBookmark(newId,title,description,url2,rating){
+function updateBookmark(id,title,description,url,rating){
     console.log("funcion3");
 
     let results = document.querySelector( '.results' );
-    let url = `/bookmark/${newId}/`;
     let data = {
-        id : newId,
+        id : id,
         title : title,
         description: description,
-        url: url2,
+        url: url,
         rating:rating
     }
+    console.log("id",id);
     let settings = {
         method : 'PATCH',
         headers : {
@@ -179,7 +179,7 @@ function updateBookmark(newId,title,description,url2,rating){
         },
             body : JSON.stringify( data )
     }
-    fetch( `/bookmark/${newId}`, settings )
+    fetch( `/bookmark/${id}`, settings )
         .then( response => {
             console.log("funcion4");
 
@@ -219,18 +219,75 @@ function updateBookmark(newId,title,description,url2,rating){
         });
 
 }
+
+function getByTitle(title){
+    console.log("title",title);
+    const settings = {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${API_TOKEN}`
+        }
+    }
+    fetch(`/bookmarks/byTitle?title=${title}`, settings)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(response.statusText);
+            }
+        })
+        .then(response2 => {
+            document.querySelector(".results").innerHTML = "";
+            response2.forEach(element => {
+                document.querySelector(".results").innerHTML += `
+                <div class="item">
+                    <p>
+                        ID: ${element.id}
+                    </p>
+                    <p>
+                        Title: ${element.title}
+                    </p>
+                    <p>
+                        Description: ${element.description}
+                    </p>
+                    <p>
+                        URL: ${element.url}
+                    </p>
+                    <p>
+                        Rating: ${element.rating}
+                    </p>
+                </div>
+            `;
+            });
+        })
+        .catch(err => {
+            document.querySelector(".results").innerText = err.message;
+        });
+}
+
+function watchGetByTitle(){
+    let bookmarksByTitleForm = document.querySelector( '.bookmarksByTitle-form' );
+
+    bookmarksByTitleForm.addEventListener( 'submit', ( event ) => {
+        event.preventDefault();
+        let title = document.getElementById('bookmarkTitleByTitle').value;
+        getByTitle(title);
+    });
+}
+
+
 function watchUpdateForm(){
     let bookmarksForm = document.querySelector( '.update-bookmark-form' );
 
     bookmarksForm.addEventListener( 'submit', ( event ) => {
         event.preventDefault();
-        let newId = document.getElementById('bookmarkId').value;
-        let title = document.getElementById('bookmarkTitle').value;
-        let description = document.getElementById('bookmarkDescription').value;
-        let url2 = document.getElementById('bookmarkUrl').value;
-        let rating = document.getElementById('bookmarkRating').value;
+        let id = document.getElementById('bookmarkIdUpdate').value;
+        let title = document.getElementById('bookmarkTitleUpdate').value;
+        let description = document.getElementById('bookmarkDescriptionUpdate').value;
+        let url = document.getElementById('bookmarkUrlUpdate').value;
+        let rating = document.getElementById('bookmarkRatingUpdate').value;
 
-        updateBookmark(newId,title,description,url2,rating);
+        updateBookmark(id,title,description,url,rating);
     });
 }
 
@@ -239,7 +296,7 @@ function watchDeleteForm(){
 
     bookmarksForm.addEventListener( 'submit', ( event ) => {
         event.preventDefault();
-        let id = document.getElementById('bookmarkId').value;
+        let id = document.getElementById('bookmarkIdDelete').value;
 
         deleteBookmark(id);
     });
@@ -276,6 +333,7 @@ function init(){
     watchAddbookmarkForm();
     watchDeleteForm();
     watchUpdateForm();
+    watchGetByTitle();
 }
 
 init();

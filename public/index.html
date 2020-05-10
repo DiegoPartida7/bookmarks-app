@@ -41,10 +41,10 @@
 
         <form class="delete-bookmark-form">
             <h3> Delete bookmark</h3>
-            <label for="bookmarkId">
+            <label for="bookmarkIdDelete">
                 Id:
             </label>
-            <input type="text" id="bookmarkId" />
+            <input type="text" id="bookmarkIdDelete" />
             <button type="submit">
                 Delete bookmark
             </button>
@@ -52,31 +52,43 @@
 
         <form class="update-bookmark-form">
             <h3> Update bookmark</h3>
-            <label for="bookmarkId">
+            <label for="bookmarkIdUpdate">
                 Id:
             </label>
-            <input type="text" id="bookmarkId" />
-            <label for="bookmarkTitle">
+            <input type="text" id="bookmarkIdUpdate" />
+            <label for="bookmarkTitleUpdate">
                 Title:
             </label>
-            <input type="text" id="bookmarkTitle" />
-            <label for="bookmarkDescription">
+            <input type="text" id="bookmarkTitleUpdate" />
+            <label for="bookmarkDescriptionUpdate">
                 Description:
             </label>
-            <input type="text" id="bookmarkDescription" />
-            <label for="bookmarkUrl">
+            <input type="text" id="bookmarkDescriptionUpdate" />
+            <label for="bookmarkUrlUpdate">
                 Url:
             </label>
-            <input type="text" id="bookmarkUrl" />
-            <label for="bookmarkRating">
+            <input type="text" id="bookmarkUrlUpdate" />
+            <label for="bookmarkRatingUpdate">
                 Rating:
             </label>
-            <input type="number" id="bookmarkRating" />
+            <input type="number" id="bookmarkRatingUpdate" />
             <button type="submit">
                 Update bookmark
             </button>
         </form>
 
+
+        <form class="bookmarksByTitle-form">
+            <h3> Search by title</h3>
+            <label for="bookmarkTitleByTitle">
+                Title:
+            </label>
+            <input type="text" id="bookmarkTitleByTitle" />
+            
+            <button type="submit">
+                Search
+            </button>
+        </form>
 
         <section class="results">
 
