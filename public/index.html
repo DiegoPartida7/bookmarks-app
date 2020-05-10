@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Bookmarks App</title>
+        <link href="./css/index.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <form class="bookmarks-form">
+            <label>
+                Click the buttton to get the full list of bookmarks
+            </label>
+            <button id="submit-btn" type="submit">
+                Get bookmarks
+            </button>
+        </form>
+        <form class="add-bookmark-form">
+            <label for="bookmarkName">
+                Name:
+            </label>
+            <input type="text" id="bookmarkName" />
+            <label for="bookmarkID">
+                ID:
+            </label>
+            <input type="number" id="bookmarkID" />
+            <button type="submit">
+                Add bookmark
+            </button>
+        </form>
+        <section class="results">
+
+        </section>
+        <script src="./js/index.js"></script>
+    </body>
+</html>

@@ -1,4 +1,4 @@
-const apiKey = "2abbf7c3-245b-404f-9473-ade729ed4653";
+const {APIKEY} = require("../config");
 
 const auth = (req, res, next) => {
   console.log("corrio la autoriazcion");
@@ -6,7 +6,7 @@ const auth = (req, res, next) => {
     res.statusMessage = "Necesitas mandar la llave del API";
     res.status(401).end();
   } else{
-    if (req.headers.authorization === `Bearer ${apiKey}` || req.query.apiKey === apiKey || req.headers["book-api-key"] === apiKey){
+    if (req.headers.authorization === `Bearer ${APIKEY}` || req.query.apiKey === APIKEY || req.headers["book-api-key"] === APIKEY){
       next();
     } else{
       res.statusMessage = "LLave del API inválida";
