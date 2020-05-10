@@ -159,55 +159,7 @@ app.patch('/bookmark/:id/',jsonParser, (req,res)=>{
   }
 });
 
-// app.patch('/bookmark/:id/',jsonParser, (req,res)=>{
-//   let id = req.params.id;
-//   let description = req.body.description;
-//   let url = req.body.url;
-//   let rating = req.body.rating;  
-//   let title = req.body.title;
-//   let id2 = req.body.id;
-//   if (!id) {
-//     res.statusMessage = "El id no existe";
-//     return res.status(406);
-//   }
-//   if (id !== id2) {
-//     res.statusMessage = "Los Id no hacen match";
-//     return res.status(409).end();
-//   } else{
-
-//     let book = bookmarks.find(i => {
-//       if (i.id === id) {
-//         return i;
-//       }
-//     });
-
-//     if (!book) {
-//       res.statusMessage = "No existe un bookmark con ese Id";
-//       return res.status(404).end();
-//     }
-
-//     if (title) {
-//       book.title = title;
-//     }
-
-//     if (description) {
-//       book.description = description;
-//     }
-
-//     if (url) {
-//       book.url = url;
-//     }
-
-//     if (rating) {
-//       book.rating = Number(rating);
-//     }
-
-//     res.status(202).json(book);
-//     }
-// });
-
-
-app.listen( PORT, () => {
+app.listen( 8080, () => {
   console.log( "This server is running on port 8080" );
 
   new Promise( ( resolve, reject ) => {
@@ -217,7 +169,7 @@ app.listen( PORT, () => {
           useUnifiedTopology: true, 
           useCreateIndex: true
       };
-      mongoose.connect( DATABASE_URL, settings, ( err ) => {
+      mongoose.connect( 'mongodb://localhost/bookmarksdb', settings, ( err ) => {
           if( err ){
               return reject( err );
           }
