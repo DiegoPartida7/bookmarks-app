@@ -1,11 +1,13 @@
 const API_TOKEN = '2abbf7c3-245b-404f-9473-ade729ed4653';
 
-function addbookmarkFech( name, id ){
-    let url = '/api/createbookmark';
+function addbookmarkFech( title, description, url, rating){
+    // let url = '/api/createbookmark';
 
     let data = {
-        name : name,
-        id : Number(id)
+        title : title,
+        description: description,
+        url: url,
+        rating:rating,
     }
 
     let settings = {
@@ -19,7 +21,7 @@ function addbookmarkFech( name, id ){
 
     let results = document.querySelector( '.results' );
 
-    fetch( url, settings )
+    fetch( `/bookmarks`, settings )
         .then( response => {
             if( response.ok ){
                 return response.json();
@@ -36,7 +38,7 @@ function addbookmarkFech( name, id ){
 
 function fetchbookmarks(){
 
-    let url = '/api/bookmarks';
+    let url = '/bookmarks';
     let settings = {
         method : 'GET',
         headers : {
@@ -55,7 +57,7 @@ function fetchbookmarks(){
         .then( responseJSON => {
             results.innerHTML = "";
             for ( let i = 0; i < responseJSON.length; i ++ ){
-                results.innerHTML += `<div> ${responseJSON[i].name} </div>`;
+                results.innerHTML += `<div> ${responseJSON[i].title} </div>`;
             }
         })
         .catch( err => {
@@ -79,10 +81,12 @@ function watchAddbookmarkForm(){
 
     bookmarksForm.addEventListener( 'submit' , ( event ) => {
         event.preventDefault();
-        let name = document.getElementById( 'bookmarkName' ).value;
-        let id = document.getElementById( 'bookmarkID' ).value;
+        let title = document.getElementById( 'bookmarkTitle' ).value;
+        let description = document.getElementById( 'bookmarkDescription' ).value;
+        let url = document.getElementById( 'bookmarkUrl' ).value;
+        let rating = document.getElementById( 'bookmarkRating' ).value;
 
-        addbookmarkFech( name, id );
+        addbookmarkFech( title, description, url, rating );
     })
 }
 
