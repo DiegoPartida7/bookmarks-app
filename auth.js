@@ -1,4 +1,4 @@
-const {APIKEY} = require("../config");
+const {APIKEY} = require("./config");
 
 const auth = (req, res, next) => {
   console.log("corrio la autoriazcion");
